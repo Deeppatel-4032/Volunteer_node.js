@@ -11,7 +11,7 @@ const volunteerCon = (req, res) => {
         id: Storage.length + 1,
         name: req.body.name,
         lastName: req.body.lastName,
-        phone: req.body.phone,
+        Number: req.body.Number,
         email: req.body.email,
         address: req.body.address,
         city: req.body.city,
@@ -26,8 +26,8 @@ const volunteerCon = (req, res) => {
 }
 
 const editVolCon = (req, res) => {
-    console.log("editVolCon", req.body);
     const { id } = req.params;
+    // console.log("editVolCon", req.body);
 
     const editsingleRecod = Storage.find((ediID) => ediID.id == id);
     res.render("editPageVol", { editsingleRecod });
@@ -36,16 +36,16 @@ const editVolCon = (req, res) => {
 
 const updateVolCon = (req, res) => {
     const { id } = req.params;
-    console.log("updateVolCon", req.body);
+    // console.log("updateVolCon", req.body);
 
-    Storage = Storage.map((volunTeer) => {
-        if (volunTeer.id == id) {
+    const updateVolConData = Storage.map((upID) => {
+        if (upID.id == id) {
             // Update only the specific volunteer object
             return {
-                ...volunTeer,
+                ...upID,
                 name: req.body.name,
                 lastName: req.body.lastName,
-                phone: req.body.phone,
+                Number: req.body.Number,
                 email: req.body.email,
                 address: req.body.address,
                 city: req.body.city,
@@ -53,8 +53,10 @@ const updateVolCon = (req, res) => {
                 comments: req.body.comments
             };
         }
-        return volunTeer;
+        return upID;
     });
+
+    Storage = updateVolConData;
 
     console.log("Updated Storage", Storage);
     res.redirect("/");
@@ -66,9 +68,10 @@ const deleteVolCon = (req, res) => {
         return delId.id != id
     } );
     Storage = deleteRecod;
-    console.log("Updated Storage", Storage);
+    // console.log("Updated Storage", Storage);
 
     res.redirect("/");
 }
 
-module.exports = { defaultCon, volunteerCon, editVolCon, updateVolCon, deleteVolCon };
+
+module.exports = { defaultCon, volunteerCon, editVolCon, updateVolCon, deleteVolCon,};

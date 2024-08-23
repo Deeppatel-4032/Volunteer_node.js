@@ -13,7 +13,7 @@
         <div class="row">
           <div class="d-flex justify-content-center align-items-center">
             <div class="col-6">
-              <div class="imgTag p-4">
+              <div class="imgTag px-4">
                 <img src="./img/volunteer.img" alt="volunteer_img" style="width: 310px;">
               </div>
             </div>
@@ -95,7 +95,7 @@
           <div class="col-12">
             <table class="table table-dark table-striped">
               <thead>
-                <tr>
+                <tr class="text-center">
                   <th scope="col">#ID</th>
                   <th scope="col">Name</th>
                   <th scope="col">Last Name</th>
@@ -110,11 +110,11 @@
               </thead>
               <tbody>
                <% volunTeers.forEach((volEle) => { %>
-                  <tr>
+                  <tr class="text-center">
                     <th scope="row"><%= volEle.id %></th>
                     <td><%= volEle.name %></td>
                     <td><%= volEle.lastName %></td>
-                    <td><%= volEle.phone %></td>
+                    <td><%= volEle.number %></td>
                     <td><%= volEle.email %></td>
                     <td><%= volEle.address %></td>
                     <td><%= volEle.city %></td>
