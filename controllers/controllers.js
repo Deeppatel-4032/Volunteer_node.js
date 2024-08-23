@@ -1,4 +1,5 @@
 let Storage = [];
+let index =0;
 
 const defaultCon = (req, res) => {
     res.render("index.ejs", { volunTeers: Storage });
@@ -11,16 +12,17 @@ const volunteerCon = (req, res) => {
         id: Storage.length + 1,
         name: req.body.name,
         lastName: req.body.lastName,
-        Number: req.body.Number,
+        number: req.body.number,
         email: req.body.email,
         address: req.body.address,
         city: req.body.city,
         skills: req.body.skills,
         comments: req.body.comments
     }
-
+    
     Storage = [...Storage, volunTeerObj];
     console.log("Storage", Storage);
+
 
     res.redirect("/");
 }
@@ -38,25 +40,18 @@ const updateVolCon = (req, res) => {
     const { id } = req.params;
     // console.log("updateVolCon", req.body);
 
-    const updateVolConData = Storage.map((upID) => {
-        if (upID.id == id) {
-            // Update only the specific volunteer object
-            return {
-                ...upID,
-                name: req.body.name,
-                lastName: req.body.lastName,
-                Number: req.body.Number,
-                email: req.body.email,
-                address: req.body.address,
-                city: req.body.city,
-                skills: req.body.skills,
-                comments: req.body.comments
-            };
-        }
-        return upID;
+    const updateVolConData = Storage.find((upID) => {
+        return upID.id = id;
     });
 
-    Storage = updateVolConData;
+    updateVolConData.name = req.body.name;
+    updateVolConData.lastName = req.body.lastName,
+    updateVolConData.number = req.body.number,
+    updateVolConData.email = req.body.email,
+    updateVolConData.address = req.body.address,
+    updateVolConData.city = req.body.city,
+    updateVolConData.skills = req.body.skills,
+    updateVolConData.comments = req.body.comments
 
     console.log("Updated Storage", Storage);
     res.redirect("/");
